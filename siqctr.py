@@ -22,8 +22,8 @@ t = np.linspace(0, 200, 200)
 # The SIR model differential equations.
 def deriv(y, t, N, Test, C, beta, gamma):
     S, I, Q, R = y
-    dSdt = -beta * S * I / N
-    dIdt = beta * S * I / N - gamma * I - Test * I /(C + I)
+    dSdt = -beta * S * I / (S+I+R)
+    dIdt = beta * S * I / (S+I+R) - gamma * I - Test * I /(C + I)
     dQdt = Test * I /(C + I) - gamma * Q
     dRdt = gamma * I + gamma * Q
     return dSdt, dIdt, dQdt, dRdt
