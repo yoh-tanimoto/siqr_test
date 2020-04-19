@@ -9,6 +9,10 @@ This is a variation of the SIQR model, where there is a compartment "A" of asymp
 # tracing
 A variation of trasym, where asymptomatic carriers are also detected and quarantined with a certain rate.
 
+# import
+A variation of siqr-test, where there is the compoartment of asymptomatic carriers (A). There is a fixed number of confounding disease (Inf) and a fixed number of tests are conducted every day, both to A and to I. If a carrier (symptomatic or not) is tested, s/he goes to Q.
+Interestingly, whether the contagion diverges or not depends both on the number of tests and the initial number of infection.
+
+
 The original code of the SIR model by Christian Hill is here
 https://scipython.com/book/chapter-8-scipy/additional-examples/the-sir-epidemic-model/
-
