@@ -15,11 +15,17 @@ Interestingly, whether the contagion diverges or not depends both on the number 
 
 The differential equation is the following:
     dSdt = -(beta1+beta2) * S * (I+A) / N
+    
     dIdt = beta1 * S * (I+A) / N - Test * I / (2 * (I + Inf)) - gamma1 * I
+    
     dQdt = Test * I / (2 * (I + Inf)) + Test * I / (2 * (A + Inf)) - gamma1 * Q
+    
     dAdt = beta2 * S * (I+A) / N - Test * I / (2 * (I + Inf)) - gamma2 * A
+    
     dRdt = gamma1 * I + gamma2 * A
+    
     dRqdt = gamma1 * Q
+    
 where S: susceptible, I: infected (with symptons), Q: quarantined, A: asymptomatic, R: recovered.
 The sum I + A contribute to new infection (dIdt and dAdt), which is proportional to the number of contacts. As for I (symptomatic), the half of the tests are conducted on each day on the population I + Inf, so (assuming the 100% sensitivity of the test) only Test * I / (2 * (I + Inf)) are quarantined. The testing on A should be modelled on contact-tracing, but currently it is not implemented, so the equation for A is the same as that for I, except parameters.
 The plots are made for I+A (real infected, not just observed), Q+Rq (total positive), new positive and the rate of positive among tests.
