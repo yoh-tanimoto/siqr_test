@@ -14,6 +14,7 @@ A variation of siqr-test, where there is the compoartment of asymptomatic carrie
 Interestingly, whether the contagion diverges or not depends both on the number of tests and the initial number of infection.
 
 The differential equation is the following:
+
     dSdt = -(beta1+beta2) * S * (I+A) / N
     
     dIdt = beta1 * S * (I+A) / N - Test * I / (2 * (I + Inf)) - gamma1 * I
