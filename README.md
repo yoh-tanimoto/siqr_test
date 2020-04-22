@@ -31,6 +31,9 @@ where S: susceptible, I: infected (with symptons), Q: quarantined, A: asymptomat
 The sum I + A contributes to new infection (dIdt and dAdt), which is proportional to the number of contacts with S. As for I (symptomatic), the half of the tests are conducted on each day on the population I + Flu, so (assuming the 100% sensitivity of the test) only Test * I / (2 * (I + Flu)) are quarantined. The testing on A should be modelled on contact-tracing, but currently it is not implemented, so the equation for A is the same as that for I, except parameters.
 The plots are made for I+A (real infected, not just observed), Q+Rq (total positive), new positive and the rate of positive among tests.
 
+# seir_ld
+A variation of the SEIR model with a lockdown, or a similar sudden change of contact rate.
+
 
 The original code of the SIR model by Christian Hill is here
 https://scipython.com/book/chapter-8-scipy/additional-examples/the-sir-epidemic-model/
