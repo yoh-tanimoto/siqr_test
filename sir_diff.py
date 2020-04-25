@@ -1,3 +1,5 @@
+# The original code of the SIR model using SciPy odeint by Christian Hill is here https://scipython.com/book/chapter-8-scipy/additional-examples/the-sir-epidemic-model/
+
 import numpy as np
 import matplotlib.pyplot as plt
 
