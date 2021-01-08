@@ -38,7 +38,26 @@ This is a variation of the SIQR model, where there is a compartment "A" of asymp
 # tracing
 A variation of trasym, where asymptomatic carriers are also detected and quarantined with a certain rate.
 
+# massteststratified
 
+A variation of the SIR model with testing. In this model, the population is split into two groups (N1 and N2), those who get tested and those who do not.
+The testing rate is r (r * N tests every day), carried out only to S1 and I1. We assume that the contacts between the groups N1 and N2 are such that if one person in the group N2
+have M contacts per day, then mu * M are in N1 and (1-mu) * M are in N2. The differential equation is then given by
+
+    dS1dt = -beta * (S1 * I1 * (1 - mu * N2/N1) / N1 + S1 * I2 * mu / N1)
+
+    dS2dt = -beta * (S2 * I1 *  mu * N2/N1 / N2 + S2 * I2 * (1-mu) / N2)
+
+    dI1dt = beta * (S1 * I1 * (1 - mu * N2/N1) / N1 + S1 * I2 * mu / N1)  - gamma * I1 - s * r * N * I1 / (S1+I1)
+
+    dI2dt = beta * (S2 * I1 *  mu * N2/N1 / N2 + S2 * I2 * (1-mu) / N2)  - gamma * I2
+
+    dR1dt = gamma * I1  + s * r * N * I1 / (S1+I1)
+
+    dR2dt = gamma * I2
+
+The linearized equation about I1, I2 is given by the matrix ((beta * (1 - mu * N2/N1) - gamma - s * r * N/N_1, beta * mu), (beta * mu * N2/N1, beta * (1-mu) - gamma)).
+Whether the infection grows exponentially or not is determined by the determinant of this matrix (it grows if the determinant is negative).
 
 The original code of the SIR model by Christian Hill is here
 https://scipython.com/book/chapter-8-scipy/additional-examples/the-sir-epidemic-model/
