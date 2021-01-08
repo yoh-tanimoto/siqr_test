@@ -8,8 +8,8 @@ import matplotlib.pyplot as plt
 
 # Total population: N
 N = 100000000
-# Testing rate, sensitivity, acceptance (a*N get tested and (1-a)*N do not)
-r = 0.3
+# Testing rate (r*N tests per day), sensitivity, acceptance (a*N get tested and (1-a)*N do not)
+r = 0.23
 s = 1
 a = 0.8
 
@@ -24,9 +24,9 @@ N2 = (1-a) * N
 # Contact rate, beta, and mean recovery rate, gamma, (in 1/days),
 # and mixing rate, mu (among the contacts of a no-testing person, mu get tested and (1-mu) do not.
 # In addition, I assume the number of contacts between two groups is mu * N_2, hence there are mu * N_2/N_1 contacts per one testing person).
-beta, gamma, mu = 0.3, 0.15, 0.1
+beta, gamma, mu = 0.27, 0.15, 0.4
 # A grid of time points (in days)
-t = np.linspace(0, 500, 500)
+t = np.linspace(0, 1000, 1000)
 
 # The SIR model differential equations.
 def deriv(y, t, N, beta, gamma, mu):
