@@ -8,20 +8,22 @@ import matplotlib.pyplot as plt
 
 # Total population: N
 N = 100000000
-# Testing rate, sensitivity, acceptance
+# Testing rate, sensitivity, acceptance (a*N get tested and (1-a)*N do not)
 r = 0.3
 s = 1
 a = 0.8
 
 # Initial number of infected, quarantined, and removed individuals, I0 and R0.
-I10, I20, R10, R20 = 100, 100, 0, 0
+I10, I20, R10, R20 = 100*a, 100*a, 0, 0
 # Everyone else, S0, is susceptible to infection initially. Testing acceptance, a.
 S10 = a * (N - I10 - I20 - R10 - R20)
 S20 = (1-a)*(N - I10 - I20 - R10- R20)
 N1 = a * N
 N2 = (1-a) * N
 
-# Contact rate, beta, and mean recovery rate, gamma, (in 1/days), mixing rate, mu.
+# Contact rate, beta, and mean recovery rate, gamma, (in 1/days),
+# and mixing rate, mu (among the contacts of a no-testing person, mu get tested and (1-mu) do not.
+# In addition, I assume the number of contacts between two groups is mu * N_2, hence there are mu * N_2/N_1 contacts per one testing person).
 beta, gamma, mu = 0.3, 0.15, 0.1
 # A grid of time points (in days)
 t = np.linspace(0, 500, 500)
@@ -29,9 +31,9 @@ t = np.linspace(0, 500, 500)
 # The SIR model differential equations.
 def deriv(y, t, N, beta, gamma, mu):
     S1, S2, I1, I2, R1, R2 = y
-    dS1dt = -beta * (S1 * I1 * (1 - mu * a) / N1 + S1 * I2 * mu / N1)
+    dS1dt = -beta * (S1 * I1 * (1 - mu * N2/N1) / N1 + S1 * I2 * mu / N1)
     dS2dt = -beta * (S2 * I1 * mu * a / N2 + S2 * I2 * (1-mu) / N2)
-    dI1dt = beta * (S1 * I1 * (1 - mu * a) / N1 + S1 * I2 * mu / N1)  - gamma * I1 - s * r * N * I1 / (S1+I1)
+    dI1dt = beta * (S1 * I1 * (1 - mu * N2/N1) / N1 + S1 * I2 * mu / N1)  - gamma * I1 - s * r * N * I1 / (S1+I1)
     dI2dt = beta * (S2 * I1 * mu * a / N2 + S2 * I2 * (1-mu) / N2)  - gamma * I2
     dR1dt = gamma * I1  + s * r * N * I1 / (S1+I1)
     dR2dt = gamma * I2
