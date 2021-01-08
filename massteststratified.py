@@ -32,9 +32,9 @@ t = np.linspace(0, 500, 500)
 def deriv(y, t, N, beta, gamma, mu):
     S1, S2, I1, I2, R1, R2 = y
     dS1dt = -beta * (S1 * I1 * (1 - mu * N2/N1) / N1 + S1 * I2 * mu / N1)
-    dS2dt = -beta * (S2 * I1 * mu * a / N2 + S2 * I2 * (1-mu) / N2)
+    dS2dt = -beta * (S2 * I1 *  mu * N2/N1 / N2 + S2 * I2 * (1-mu) / N2)
     dI1dt = beta * (S1 * I1 * (1 - mu * N2/N1) / N1 + S1 * I2 * mu / N1)  - gamma * I1 - s * r * N * I1 / (S1+I1)
-    dI2dt = beta * (S2 * I1 * mu * a / N2 + S2 * I2 * (1-mu) / N2)  - gamma * I2
+    dI2dt = beta * (S2 * I1 *  mu * N2/N1 / N2 + S2 * I2 * (1-mu) / N2)  - gamma * I2
     dR1dt = gamma * I1  + s * r * N * I1 / (S1+I1)
     dR2dt = gamma * I2
     return dS1dt, dS2dt, dI1dt, dI2dt, dR1dt, dR2dt
